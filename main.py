@@ -29,6 +29,7 @@ def lista_distancias_robo(lista):
 def distancia_total_robo(resgate, robo):
     return reduce(soma, lista_distancias_robo(lista_coordenadas_robo(resgate, robo)))
 
+# ========== TESTES ============
 #print(lista_coordenadas_robo(reg1(), robo()))
 #print(lista_distancias_robo(lista_coordenadas_robo(reg1(), robo())))
 #print(distancia_total_robo(reg1(), robo()))
@@ -53,17 +54,22 @@ def tempo_total(resgate, robo):
 # SERA QUE TEM COMO FAZER DE FORMA MAIS INTELIGENTE ?????????
 
 # Retorna uma lista com as informações requeridas 
-def lista_info(resgate):
+def lista_infoB(resgate):
     return [robo_mais_distante(resgate)[0][0], lista_coordenadas_robo(resgate, robo_mais_distante(resgate)[0]), tempo_total(resgate, robo_mais_distante(resgate)[0])]
 
+# ========== TESTES ============
 #print(robo_mais_distante(reg1()))
-#print(lista_info(reg1()))
+#print(lista_infoB(reg1()))
 
 
-#Exiba os caminhos percorridos por todos os robôs que entraram no terreno de busca, ordenados crescentemente pela distância total percorrida;
+# C - Exiba os caminhos percorridos por todos os robôs que entraram no terreno de busca, ordenados crescentemente pela distância total percorrida;
 
+def caminhos_percorridos(resgate):
+    return [distancia_total_robo(resgate, x) for x in resgate]
 
-# Forneça a identidade do(s) robô(s) que conseguiu(ram) informar o maior número de vítimas (considerando que não há duplicação de identificação de vítima por um mesmo robô).
+print(caminhos_percorridos(reg1()))
+
+# D - Forneça a identidade do(s) robô(s) que conseguiu(ram) informar o maior número de vítimas (considerando que não há duplicação de identificação de vítima por um mesmo robô).
 
 # Calcula o total de vitimas atendidas por um determinado robo
 def total_vitimas_robo(resgate, robo):
@@ -79,4 +85,5 @@ def robo_identifica_mais_vitimas(resgate):
     # NAO SEI SE O [0] ALI NO FINAL É GAMBIARRA PORQUE IMPRIME SEM AS ASPAS SIMPLES 
     return [x[0] for x in resgate if total_vitimas_robo(resgate, x) == max(lista_total_vitimas_robo(resgate, robo))][0]
 
-#print(robo_identifica_mais_vitimas(reg1))
+# ========== TESTES ============
+#print(robo_identifica_mais_vitimas(reg1()))
