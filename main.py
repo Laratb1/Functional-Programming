@@ -1,5 +1,7 @@
 from math import sqrt
 from functools import reduce
+from operator import itemgetter, attrgetter
+
 
 #(identificação, instante, ponto, num de vítimas)
 def reg1(): return [('robo1', 1, (5, 8), 4), ('robo2', 2, (5, 4), 4), ('robo3', 3, (2, 2), 1), ('robo1', 4, (4, 9), 4), ('robo3', 5, (1, 3), 3), ('robo4', 6, (7, 5), 3), ('robo5', 7, (8, 6), 1), ('robo1', 8, (3, 2), 4), ('robo2', 9, (1, 8), 4)]
@@ -68,13 +70,16 @@ def lista_infoB(resgate):
 def caminhos_percorridos(resgate):
     return [(x[0], distancia_total_robo(resgate, x), lista_coordenadas_robo(resgate, x)) for x in resgate]
 
-def ordena_distancia(lista):
-    def aux(): return lista[0]
-    for x in lista[1:]:
-        return
+def ordena_distancia(listaReg):
+    return sorted(listaReg, key=itemgetter(1), reverse=False)
 
-print(caminhos_percorridos(reg1()))
+def formata_lista(listaReg):
+    def lista(): return ordena_distancia(caminhos_percorridos(listaReg))
+    def f(x): return lista()[x] if (lista()[x][0] != lista()[x-1][0]) else 0
+    return list(filter(lambda x: x != 0, [f(x) for x in range(0, len(lista()) - 1)]))
 
+
+#print(formata_lista(reg1()))
 
 # D - Forneça a identidade do(s) robô(s) que conseguiu(ram) informar o maior número de vítimas (considerando que não há duplicação de identificação de vítima por um mesmo robô).
 
