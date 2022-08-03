@@ -55,6 +55,7 @@ def tempo_total(resgate, robo):
 
 # Retorna uma lista com as informações requeridas 
 def lista_infoB(resgate):
+    # AQUI SE TIVER DOIS ROBOS MAIS DISTANTES NAO IRÁ FUNCIONAR 
     return [robo_mais_distante(resgate)[0][0], lista_coordenadas_robo(resgate, robo_mais_distante(resgate)[0]), tempo_total(resgate, robo_mais_distante(resgate)[0])]
 
 # ========== TESTES ============
@@ -65,9 +66,15 @@ def lista_infoB(resgate):
 # C - Exiba os caminhos percorridos por todos os robôs que entraram no terreno de busca, ordenados crescentemente pela distância total percorrida;
 
 def caminhos_percorridos(resgate):
-    return [distancia_total_robo(resgate, x) for x in resgate]
+    return [(x[0], distancia_total_robo(resgate, x), lista_coordenadas_robo(resgate, x)) for x in resgate]
+
+def ordena_distancia(lista):
+    def aux(): return lista[0]
+    for x in lista[1:]:
+        return
 
 print(caminhos_percorridos(reg1()))
+
 
 # D - Forneça a identidade do(s) robô(s) que conseguiu(ram) informar o maior número de vítimas (considerando que não há duplicação de identificação de vítima por um mesmo robô).
 
